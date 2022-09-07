@@ -22,7 +22,7 @@ Pequeno projeto em DotNet Core v3.1 (C# com Console Application) para demonstrar
 1. Na pasta "Database" você encontrará os 2 bancos de dados
 2. O BD com o nome "stock.db" é o BD que será usado para teste (já contém o resultado do teste efetuado com uma tabela criada com dados)
 3. O BD com o nome "stock_BD_EMPTY.db" serve apenas para se você precisar de um BD vazio
-4. Se quiser mudar o caminha onde o BD fica, vá para o projeto "KITAB.CRUD.Products.Infra" e altere o arquivo "Repository.cs"
+4. Se quiser mudar o caminha onde o BD fica, vá para o projeto "KITAB.Products.Infra" e altere o arquivo "Repository.cs"
 
 ----
 

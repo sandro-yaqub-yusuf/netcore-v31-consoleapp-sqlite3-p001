@@ -72,7 +72,7 @@ namespace KITAB.Products.ConsoleApp
             Console.WriteLine("Inserindo um produto na tabela de Produtos...");
             Console.WriteLine("");
 
-            var _productDTO = new ProductViewModel()
+            var productDTO = new ProductViewModel()
             {
                 Name = "Produto 1",
                 Description = "Descrição do Produto 1",
@@ -85,10 +85,10 @@ namespace KITAB.Products.ConsoleApp
                 Status = "A"
             };
 
-            var _product = _mapper.Map<Product>(_productDTO);
+            var product = _mapper.Map<Product>(productDTO);
 
             // Insere os dados do produto na tabela "Product"
-            _productService.Insert(_product);
+            _productService.Insert(product);
 
             return (!_notificatorService.HaveNotification());
         }
@@ -99,33 +99,33 @@ namespace KITAB.Products.ConsoleApp
             Console.WriteLine("");
 
             // Insere os dados do produto na tabela "Product"
-            var _products = "";
-            var _count = 0;
+            var products = "";
+            var count = 0;
 
             for (int i = 2; i <= 101; i++)
             {
-                _products += "INSERT INTO Product " +
-                             "(Name, Description, Image, Inventory, CostPrice, SalePrice, CreatedAt, Status) VALUES (" +
-                             "'Produto " + i.ToString() + "', " +
-                             "'Descrição do Produto " + i.ToString() + "', " +
-                             "'9d11cb8a-f0dd-4aef-a803-bc257959bbc0_produto-256x256.jpg', " +
-                             (i * 2).ToString() + ", " +
-                             (i * 10).ToString() + ", " +
-                             (i * 15).ToString() + ", " +
-                             "'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.0000000") + "', " +
-                             "'A');";
+                products += "INSERT INTO Product " +
+                            "(Name, Description, Image, Inventory, CostPrice, SalePrice, CreatedAt, Status) VALUES (" +
+                            "'Produto " + i.ToString() + "', " +
+                            "'Descrição do Produto " + i.ToString() + "', " +
+                            "'9d11cb8a-f0dd-4aef-a803-bc257959bbc0_produto-256x256.jpg', " +
+                            (i * 2).ToString() + ", " +
+                            (i * 10).ToString() + ", " +
+                            (i * 15).ToString() + ", " +
+                            "'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.0000000") + "', " +
+                            "'A');";
 
-                _count++;
+                count++;
 
-                if (_count >= 50)
+                if (count >= 50)
                 {
                     // Insere 50 produtos por vez na tabela "Product"
-                    _productService.ExecuteSQL(_products);
+                    _productService.ExecuteSQL(products);
 
                     if (_notificatorService.HaveNotification()) break;
 
-                    _products = "";
-                    _count = 0;
+                    products = "";
+                    count = 0;
                 }
             }
 
@@ -171,14 +171,14 @@ namespace KITAB.Products.ConsoleApp
             Console.WriteLine("");
 
             // Pega todos os produtos na tabela "Product"
-            var _products = _productService.GetAll();
+            var products = _productService.GetAll();
 
             if (!_notificatorService.HaveNotification())
             {
-                foreach (var _product in _products)
+                foreach (var product in products)
                 {
-                    Console.WriteLine("ID: " + _product.Id + " - Produto: " + _product.Description + " - " +
-                                      "Quantidade: " + _product.Inventory + " - Preço de Venda: " + _product.SalePrice);
+                    Console.WriteLine("ID: " + product.Id + " - Produto: " + product.Description + " - " +
+                                      "Quantidade: " + product.Inventory + " - Preço de Venda: " + product.SalePrice);
                 }
             }
 
@@ -193,22 +193,22 @@ namespace KITAB.Products.ConsoleApp
             Console.WriteLine("");
 
             // Localiza os dados do produto com o ID = 10 na tabela "Product"
-            var _product = _productService.GetById(10);
+            var product = _productService.GetById(10);
 
-            var _productDTO = _mapper.Map<ProductViewModel>(_product);
+            var productDTO = _mapper.Map<ProductViewModel>(product);
 
             if (!_notificatorService.HaveNotification())
             {
-                Console.WriteLine("ID: " + _productDTO.Id + " - " +
-                                  "Produto: " + _productDTO.Name + " - " +
-                                  "Descrição: " + _productDTO.Description + " - " +
-                                  "Imagem: " + _productDTO.Image + " - " +
-                                  "Quantidade: " + _productDTO.Inventory + " - " +
-                                  "Preço de Custo: " + _productDTO.CostPrice + " - " +
-                                  "Preço de Venda: " + _productDTO.SalePrice + " - " +
-                                  "Data Cadastro: " + _productDTO.CreatedAt.ToString("dd/MM/yyyy") + " - " +
-                                  "Data Alteração: " + _productDTO.UpdatedAt?.ToString("dd/MM/yyyy") + " - " +
-                                  "Situação: " + _productDTO.Status);
+                Console.WriteLine("ID: " + productDTO.Id + " - " +
+                                  "Produto: " + productDTO.Name + " - " +
+                                  "Descrição: " + productDTO.Description + " - " +
+                                  "Imagem: " + productDTO.Image + " - " +
+                                  "Quantidade: " + productDTO.Inventory + " - " +
+                                  "Preço de Custo: " + productDTO.CostPrice + " - " +
+                                  "Preço de Venda: " + productDTO.SalePrice + " - " +
+                                  "Data Cadastro: " + productDTO.CreatedAt.ToString("dd/MM/yyyy") + " - " +
+                                  "Data Alteração: " + productDTO.UpdatedAt?.ToString("dd/MM/yyyy") + " - " +
+                                  "Situação: " + productDTO.Status);
 
                 Console.WriteLine("");
             }

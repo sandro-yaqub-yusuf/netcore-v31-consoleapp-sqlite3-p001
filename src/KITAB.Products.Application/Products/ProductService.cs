@@ -44,11 +44,11 @@ namespace KITAB.Products.Application.Products
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int p_id)
         {
             try
             {
-                _productRepository.Delete(id);
+                _productRepository.Delete(p_id);
             }
             catch (Exception ex)
             {
@@ -56,36 +56,36 @@ namespace KITAB.Products.Application.Products
             }
         }
 
-        public Product GetById(int id)
+        public Product GetById(int p_id)
         {
-            Product _product = null;
+            Product product = null;
 
             try
             {
-                _product = _productRepository.GetById(id);
+                product = _productRepository.GetById(p_id);
             }
             catch (Exception ex)
             {
                 Notify(ex.Message);
             }
 
-            return _product;
+            return product;
         }
 
         public List<Product> GetAll()
         {
-            List<Product> _products = null;
+            List<Product> products = null;
 
             try
             {
-                _products = _productRepository.GetAll();
+                products = _productRepository.GetAll();
             }
             catch (Exception ex)
             {
                 Notify(ex.Message);
             }
 
-            return _products;
+            return products;
         }
 
         public void ExecuteSQL(string p_sql)

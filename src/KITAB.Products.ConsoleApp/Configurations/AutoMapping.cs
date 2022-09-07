@@ -2,7 +2,7 @@
 using KITAB.Products.ConsoleApp.ViewModels;
 using KITAB.Products.Domain.Models;
 
-namespace KITAB.Products.ConsoleApp
+namespace KITAB.Products.ConsoleApp.Configurations
 {
     public class AutoMapping : Profile
     {

@@ -5,7 +5,7 @@ namespace KITAB.Products.Application.Notificators
 {
     public interface INotificatorService
     {
-        void Handle(Notification notificacao);
+        void Handle(Notification p_notification);
         bool HaveNotification();
         List<Notification> GetAll();
     }

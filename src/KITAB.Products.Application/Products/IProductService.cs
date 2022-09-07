@@ -5,12 +5,12 @@ namespace KITAB.Products.Application.Products
 {
     public interface IProductService
     {
-        void Insert(Product produto);
-        void Update(Product produto);
-        void Delete(int id);
-        Product GetById(int id);
+        void Insert(Product p_product);
+        void Update(Product p_product);
+        void Delete(int p_id);
+        Product GetById(int p_id);
         List<Product> GetAll();
-        void ExecuteSQL(string sql);
+        void ExecuteSQL(string p_sql);
         void CreateTable();
         void DropTable();
     }

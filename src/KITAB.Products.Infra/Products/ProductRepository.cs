@@ -22,12 +22,12 @@ namespace KITAB.Products.Infra.Products
                     try
                     {
                         // Insere o dado do produto na tabela "Product"
-                        var _sql = "INSERT INTO Product " +
-                                   "(Name, Description, Image, Inventory, CostPrice, SalePrice, CreatedAt, UpdatedAt, Status) " +
-                                   "VALUES (@Name, @Description, @Image, @Inventory, @CostPrice, @SalePrice, @CreatedAt, @UpdatedAt, @Status);" +
-                                   "select last_insert_rowid();";
+                        var sql = "INSERT INTO Product " +
+                                  "(Name, Description, Image, Inventory, CostPrice, SalePrice, CreatedAt, UpdatedAt, Status) " +
+                                  "VALUES (@Name, @Description, @Image, @Inventory, @CostPrice, @SalePrice, @CreatedAt, @UpdatedAt, @Status);" +
+                                  "select last_insert_rowid();";
 
-                        p_product.Id = cnn.Query<int>(_sql, p_product).First();
+                        p_product.Id = cnn.Query<int>(sql, p_product).First();
 
                         transaction.Commit();
                     }
@@ -57,18 +57,18 @@ namespace KITAB.Products.Infra.Products
                     try
                     {
                         // Altera o dado do produto na tabela "Product"
-                        var _sql = "UPDATE Product SET " +
-                                   "Name = @Name, " +
-                                   "Description = @Description, " +
-                                   "Image = @Image, " +
-                                   "Inventory = @Inventory, " +
-                                   "CostPrice = @CostPrice, " +
-                                   "SalePrice = @SalePrice, " +
-                                   "UpdatedAt = @UpdatedAt, " +
-                                   "Status = @Status " +
-                                   "WHERE Id = @Id;";
+                        var sql = "UPDATE Product SET " +
+                                  "Name = @Name, " +
+                                  "Description = @Description, " +
+                                  "Image = @Image, " +
+                                  "Inventory = @Inventory, " +
+                                  "CostPrice = @CostPrice, " +
+                                  "SalePrice = @SalePrice, " +
+                                  "UpdatedAt = @UpdatedAt, " +
+                                  "Status = @Status " +
+                                  "WHERE Id = @Id;";
 
-                        cnn.Execute(_sql, p_product);
+                        cnn.Execute(sql, p_product);
 
                         transaction.Commit();
                     }
@@ -85,7 +85,7 @@ namespace KITAB.Products.Infra.Products
             }
         }
 
-        public void Delete(int id)
+        public void Delete(int p_id)
         {
             if (File.Exists(DbFile))
             {
@@ -98,9 +98,9 @@ namespace KITAB.Products.Infra.Products
                     try
                     {
                         // Exclui o dado do produto na tabela "Product"
-                        var _sql = "DELETE FROM Product WHERE Id = @id;";
+                        var sql = "DELETE FROM Product WHERE Id = @p_id;";
 
-                        cnn.Execute(_sql, new {id});
+                        cnn.Execute(sql, new {p_id});
 
                         transaction.Commit();
                     }
@@ -117,9 +117,9 @@ namespace KITAB.Products.Infra.Products
             }
         }
 
-        public Product GetById(int id)
+        public Product GetById(int p_id)
         {
-            Product _produto = null;
+            Product product = null;
 
             if (File.Exists(DbFile))
             {
@@ -129,9 +129,9 @@ namespace KITAB.Products.Infra.Products
                 {
                     cnn.Open();
 
-                    var _sql = "SELECT * FROM Product WHERE Id = @id;";
+                    var sql = "SELECT * FROM Product WHERE Id = @p_id;";
 
-                    _produto = cnn.Query<Product>(_sql, new {id}).FirstOrDefault();
+                    product = cnn.Query<Product>(sql, new {p_id}).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
@@ -142,12 +142,12 @@ namespace KITAB.Products.Infra.Products
                 cnn?.Dispose();
             }
 
-            return _produto;
+            return product;
         }
 
         public List<Product> GetAll()
         {
-            List<Product> _produto = null;
+            List<Product> products = null;
 
             if (File.Exists(DbFile))
             {
@@ -157,9 +157,9 @@ namespace KITAB.Products.Infra.Products
                 {
                     cnn.Open();
 
-                    var _sql = "SELECT * FROM Product ORDER BY Id ASC;";
+                    var sql = "SELECT * FROM Product ORDER BY Id ASC;";
 
-                    _produto = cnn.Query<Product>(_sql).ToList();
+                    products = cnn.Query<Product>(sql).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -170,10 +170,10 @@ namespace KITAB.Products.Infra.Products
                 cnn?.Dispose();
             }
 
-            return _produto;
+            return products;
         }
 
-        public void ExecuteSQL(string sql)
+        public void ExecuteSQL(string p_sql)
         {
             if (File.Exists(DbFile))
             {
@@ -185,8 +185,8 @@ namespace KITAB.Products.Infra.Products
                 {
                     try
                     {
-                        // Executa as instruções _sql na tabela "Product"
-                        cnn.Execute(sql);
+                        // Executa as instruções sql na tabela "Product"
+                        cnn.Execute(p_sql);
 
                         transaction.Commit();
                     }
@@ -216,19 +216,19 @@ namespace KITAB.Products.Infra.Products
                     try
                     {
                         // Cria a tabela "Produto"
-                        var _sql = "CREATE TABLE IF NOT EXISTS Product (" +
-                                   "Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                                   "Name VARCHAR(200) NOT NULL, " +
-                                   "Description VARCHAR(1000) NOT NULL, " +
-                                   "Image VARCHAR(200) NOT NULL, " +
-                                   "Inventory INTEGER NOT NULL, " +
-                                   "CostPrice DOUBLE NOT NULL, " +
-                                   "SalePrice DOUBLE NOT NULL, " +
-                                   "CreatedAt DATETIME NOT NULL, " +
-                                   "UpdatedAt DATETIME NULL," +
-                                   "Status CHAR(1) NOT NULL DEFAULT 'A');";
+                        var sql = "CREATE TABLE IF NOT EXISTS Product (" +
+                                  "Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                                  "Name VARCHAR(200) NOT NULL, " +
+                                  "Description VARCHAR(1000) NOT NULL, " +
+                                  "Image VARCHAR(200) NOT NULL, " +
+                                  "Inventory INTEGER NOT NULL, " +
+                                  "CostPrice DOUBLE NOT NULL, " +
+                                  "SalePrice DOUBLE NOT NULL, " +
+                                  "CreatedAt DATETIME NOT NULL, " +
+                                  "UpdatedAt DATETIME NULL," +
+                                  "Status CHAR(1) NOT NULL DEFAULT 'A');";
 
-                        cnn.Execute(_sql);
+                        cnn.Execute(sql);
 
                         transaction.Commit();
                     }
@@ -258,9 +258,9 @@ namespace KITAB.Products.Infra.Products
                     try
                     {
                         // Exclui a tabela "Product"
-                        var _sql = "DROP TABLE IF EXISTS Product;";
+                        var sql = "DROP TABLE IF EXISTS Product;";
 
-                        cnn.Execute(_sql);
+                        cnn.Execute(sql);
 
                         transaction.Commit();
                     }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using KITAB.Products.Application.Notificators;
 using KITAB.Products.Application.Products;
+using KITAB.Products.ConsoleApp.Configurations;
 using KITAB.Products.Infra.Products;
 
 namespace KITAB.Products.ConsoleApp

@@ -20,7 +20,7 @@ namespace KITAB.Products.Infra
                     curDir += "\\";
                 }
 
-                return curDir + "Database\\stock.db";
+                return (curDir + "Database\\stock.db");
             }
         }
 
