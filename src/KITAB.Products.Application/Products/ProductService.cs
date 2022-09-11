@@ -15,14 +15,14 @@ namespace KITAB.Products.Application.Products
             _productRepository = productRepository;
         }
 
-        public void Insert(Product p_product)
+        public void Insert(ref Product p_product)
         {
             try
             {
                 p_product.CreatedAt = DateTime.Now;
                 p_product.UpdatedAt = null;
 
-                _productRepository.Insert(p_product);
+                _productRepository.Insert(ref p_product);
             }
             catch (Exception ex)
             {
@@ -30,13 +30,13 @@ namespace KITAB.Products.Application.Products
             }
         }
 
-        public void Update(Product p_product)
+        public void Update(ref Product p_product)
         {
             try
             {
                 p_product.UpdatedAt = DateTime.Now;
 
-                _productRepository.Update(p_product);
+                _productRepository.Update(ref p_product);
             }
             catch (Exception ex)
             {
@@ -44,11 +44,11 @@ namespace KITAB.Products.Application.Products
             }
         }
 
-        public void Delete(int p_id)
+        public void Delete(ref int p_id)
         {
             try
             {
-                _productRepository.Delete(p_id);
+                _productRepository.Delete(ref p_id);
             }
             catch (Exception ex)
             {
@@ -56,13 +56,13 @@ namespace KITAB.Products.Application.Products
             }
         }
 
-        public Product GetById(int p_id)
+        public Product GetById(ref int p_id)
         {
             Product product = null;
 
             try
             {
-                product = _productRepository.GetById(p_id);
+                product = _productRepository.GetById(ref p_id);
             }
             catch (Exception ex)
             {
@@ -88,11 +88,11 @@ namespace KITAB.Products.Application.Products
             return products;
         }
 
-        public void ExecuteSQL(string p_sql)
+        public void ExecuteSQL(ref string p_sql)
         {
             try
             {
-                _productRepository.ExecuteSQL(p_sql);
+                _productRepository.ExecuteSQL(ref p_sql);
             }
             catch (Exception ex)
             {

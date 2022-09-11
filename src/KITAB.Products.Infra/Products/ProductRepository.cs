@@ -9,7 +9,7 @@ namespace KITAB.Products.Infra.Products
 {
     public class ProductRepository : Repository, IProductRepository
     {
-        public void Insert(Product p_product)
+        public void Insert(ref Product p_product)
         {
             if (File.Exists(DbFile))
             {
@@ -44,7 +44,7 @@ namespace KITAB.Products.Infra.Products
             }
         }
 
-        public void Update(Product p_product)
+        public void Update(ref Product p_product)
         {
             if (File.Exists(DbFile))
             {
@@ -85,7 +85,7 @@ namespace KITAB.Products.Infra.Products
             }
         }
 
-        public void Delete(int p_id)
+        public void Delete(ref int p_id)
         {
             if (File.Exists(DbFile))
             {
@@ -117,7 +117,7 @@ namespace KITAB.Products.Infra.Products
             }
         }
 
-        public Product GetById(int p_id)
+        public Product GetById(ref int p_id)
         {
             Product product = null;
 
@@ -173,7 +173,7 @@ namespace KITAB.Products.Infra.Products
             return products;
         }
 
-        public void ExecuteSQL(string p_sql)
+        public void ExecuteSQL(ref string p_sql)
         {
             if (File.Exists(DbFile))
             {

@@ -88,7 +88,7 @@ namespace KITAB.Products.ConsoleApp
             var product = _mapper.Map<Product>(productDTO);
 
             // Insere os dados do produto na tabela "Product"
-            _productService.Insert(product);
+            _productService.Insert(ref product);
 
             return (!_notificatorService.HaveNotification());
         }
@@ -120,7 +120,7 @@ namespace KITAB.Products.ConsoleApp
                 if (count >= 50)
                 {
                     // Insere 50 produtos por vez na tabela "Product"
-                    _productService.ExecuteSQL(products);
+                    _productService.ExecuteSQL(ref products);
 
                     if (_notificatorService.HaveNotification()) break;
 
@@ -137,8 +137,7 @@ namespace KITAB.Products.ConsoleApp
             Console.WriteLine("Alterando o produto com o ID = 10 na tabela de Produtos...");
             Console.WriteLine("");
 
-            // Altera os dados do produto na tabela "Product"
-            _productService.Update(new Product()
+            Product product = new Product()
             {
                 Id = 10,
                 Name = "Produto 10 - Alterado",
@@ -149,7 +148,10 @@ namespace KITAB.Products.ConsoleApp
                 SalePrice = 0,
                 UpdatedAt = DateTime.Now,
                 Status = "D"
-            });
+            };
+
+            // Altera os dados do produto na tabela "Product"
+            _productService.Update(ref product);
 
             return (!_notificatorService.HaveNotification());
         }
@@ -159,8 +161,10 @@ namespace KITAB.Products.ConsoleApp
             Console.WriteLine("Excluindo o produto com o ID = 11 na tabela de Produtos...");
             Console.WriteLine("");
 
+            var productId = 11;
+
             // Exclui os dados do produto com o ID = 11 na tabela "Product"
-            _productService.Delete(11);
+            _productService.Delete(ref productId);
 
             return (!_notificatorService.HaveNotification());
         }
@@ -193,7 +197,8 @@ namespace KITAB.Products.ConsoleApp
             Console.WriteLine("");
 
             // Localiza os dados do produto com o ID = 10 na tabela "Product"
-            var product = _productService.GetById(10);
+            var productId = 10;
+            var product = _productService.GetById(ref productId);
 
             var productDTO = _mapper.Map<ProductViewModel>(product);
 
